@@ -201,6 +201,9 @@ class DropdownSearch<T> extends StatefulWidget {
 
   ///called when popup is dismissed
   final VoidCallback? onPopupDismissed;
+    
+  ///called when popup is opened
+  final VoidCallback? onPopupOpened;
 
   /// callback executed before applying value change
   ///delay before searching, change it to Duration(milliseconds: 0)
@@ -866,6 +869,7 @@ class DropdownSearchState<T> extends State<DropdownSearch<T>> {
   ///another widget we should clear the focus
   Future _selectSearchMode() async {
     _handleFocus(true);
+    widget.onPopupOpened?.call();
     if (widget.mode == Mode.MENU) {
       await _openMenu();
     } else if (widget.mode == Mode.BOTTOM_SHEET) {
